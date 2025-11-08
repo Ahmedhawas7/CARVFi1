@@ -1,1 +1,122 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import '@solana/wallet-adapter-react-ui/styles.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg-1: #0b0c10;
+  --bg-2: #1f2833;
+  --accent: #66fcf1;
+  --muted: #c5c6c7;
+  --card: #14161a;
+}
+
+* { box-sizing: border-box; margin:0; padding:0; font-family: 'Poppins', sans-serif; }
+
+body{
+  background: linear-gradient(135deg,var(--bg-1), var(--bg-2));
+  color: var(--muted);
+  min-height: 100vh;
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+header, footer{
+  background: rgba(20,20,24,0.6);
+  padding: 18px 24px;
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.logoTitle { display:flex; align-items:center; gap:12px; }
+.logoTitle img { width:48px; height:48px; border-radius:8px; }
+.logoTitle h1 { color:var(--accent); font-size:1.25rem; }
+
+.nav { display:flex; align-items:center; gap:16px; }
+.nav a { color:var(--muted); text-decoration:none; transition: color 0.3s; }
+.nav a:hover { color: #ffd166; }
+
+.hero { text-align:center; padding:80px 20px; }
+.hero h2 { color:var(--accent); font-size:2.2rem; margin-bottom:12px; }
+.hero p { color: #98a0a6; max-width:720px; margin: 0 auto; line-height:1.6; }
+
+.btn {
+  background: linear-gradient(90deg,#3b3b6e,#2563eb);
+  color:white;
+  padding:12px 18px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  box-shadow: 0 6px 18px rgba(37,99,235,0.12);
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37,99,235,0.2);
+}
+
+.card { 
+  background: var(--card); 
+  padding:24px; 
+  border-radius:12px; 
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.grid { display:grid; gap:18px; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
+
+.wallet-connect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wallet-adapter-button {
+  background: linear-gradient(90deg,#3b3b6e,#2563eb) !important;
+  border-radius: 10px !important;
+  padding: 12px 18px !important;
+  font-family: 'Poppins', sans-serif !important;
+  border: none !important;
+}
+
+.wallet-adapter-modal-wrapper {
+  background: var(--card) !important;
+}
+
+.wallet-adapter-modal-button-close {
+  background: var(--bg-2) !important;
+}
+
+@media (max-width: 768px) {
+  header, footer {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .nav {
+    margin-top: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .hero h2 {
+    font-size: 1.8rem;
+  }
+}
