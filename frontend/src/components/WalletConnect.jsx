@@ -1,17 +1,42 @@
 import React from 'react'
-import { useWallet } from '@solana/wallet-adapter-react'
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
 export default function WalletConnect(){
-  const { connected, publicKey } = useWallet()
+  const [connected, setConnected] = React.useState(false)
+  const [wallet, setWallet] = React.useState(null)
+
+  const handleConnect = () => {
+    setConnected(true)
+    setWallet('0x123...456')
+  }
+
+  const handleDisconnect = () => {
+    setConnected(false)
+    setWallet(null)
+  }
 
   return (
     <div className="wallet-connect">
-      <WalletMultiButton />
-      {connected && publicKey && (
-        <div className="mt-2 text-xs text-accent bg-card px-2 py-1 rounded">
-          {publicKey.toString().slice(0, 8)}...{publicKey.toString().slice(-8)}
-        </div>
+      {connected ? (
+        <>
+          <button 
+            onClick={handleDisconnect}
+            className="btn text-sm px-3 py-1"
+          >
+            Disconnect
+          </button>
+          {wallet && (
+            <div className="mt-2 text-xs text-accent bg-card px-2 py-1 rounded">
+              {wallet}
+            </div>
+          )}
+        </>
+      ) : (
+        <button 
+          onClick={handleConnect}
+          className="btn"
+        >
+          Connect Wallet
+        </button>
       )}
     </div>
   )
