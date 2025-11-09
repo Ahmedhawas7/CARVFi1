@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import Dashboard from './components/Dashboard'
 import Footer from './components/Footer'
+import '@solana/wallet-adapter-react-ui/styles.css';
 
 export default function App(){
   return (
