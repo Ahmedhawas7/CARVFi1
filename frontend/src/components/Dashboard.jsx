@@ -5,7 +5,7 @@ import { API_URL } from '../config'
 import { getUserPoints, saveUserPoints } from '../integration/svmClient'
 import { getRewardSuggestion } from '../integration/aiClient'
 
-export default function Dashboard() {
+export default function Dashboard({ currentUser }) { // <-- تمرير المستخدم الحالي
   const [stats, setStats] = useState({ points: 0, tweets: 0, engagement: 0 })
   const [loading, setLoading] = useState(false)
   const [isConnected, setIsConnected] = useState(false)
@@ -43,14 +43,14 @@ export default function Dashboard() {
 
   // ===== Fetch نقاط المستخدم من CARV SVM + اقتراح AI =====
   useEffect(() => {
-    if (!isConnected) return
+    if (!isConnected || !currentUser?.id) return
 
     async function fetchPointsAndAI() {
       try {
-        const points = await getUserPoints('USER_ID_PLACEHOLDER') // ضع هنا معرف المستخدم الخاص بك
+        const points = await getUserPoints(currentUser.id)
         setUserPoints(points)
 
-        const suggestion = await getRewardSuggestion('USER_ID_PLACEHOLDER')
+        const suggestion = await getRewardSuggestion(currentUser.id)
         setAiSuggestion(suggestion)
       } catch (err) {
         console.error('Error fetching CARV points or AI:', err)
@@ -58,11 +58,12 @@ export default function Dashboard() {
     }
 
     fetchPointsAndAI()
-  }, [isConnected])
+  }, [isConnected, currentUser])
 
   async function handleAddPoints(amount) {
+    if (!currentUser?.id) return
     const newPoints = userPoints + amount
-    await saveUserPoints('USER_ID_PLACEHOLDER', newPoints)
+    await saveUserPoints(currentUser.id, newPoints)
     setUserPoints(newPoints)
   }
 
