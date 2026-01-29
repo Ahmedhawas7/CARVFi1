@@ -50,5 +50,5 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Amnohiawazi/CARVFi.git
+   git clone https://github.com/Ahmedhawas7/CARVFi.git
    cd CARVFi
